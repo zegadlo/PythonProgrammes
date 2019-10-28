@@ -1,0 +1,56 @@
+def solution(S, P, Q):
+    n = len(S)
+    n1 = len(P)
+    #Mi = [[0 for i in range(4)] for j in range(n)]
+    M = []
+    #Mi = []
+    S1 = [0]*n
+    out = [0]*n1
+    
+    countA = 0
+    countC = 0
+    countG = 0
+    countT = 0
+    
+    for i in range(n):
+        #Mi[i]=M[-1]
+        if(S[i]=='A'):
+            S1[i]=1
+            countA+=1
+        if(S[i]=='C'):
+            S1[i]=2
+            countC+=1
+        if(S[i]=='G'):
+            S1[i]=3
+            countG+=1
+        if(S[i]=='T'):
+            S1[i]=4
+            countT+=1
+        M.append([countA, countC, countG, countT])
+        #print(M)
+    M.append([countA, countC, countG, countT])
+    for k in range(n1):
+        m1=max(P[k]-1,0)
+        m2=Q[k]
+        M2=M[m2]
+        M1=M[m1]
+        if(P[k]==0):
+            M1=[0, 0, 0, 0]
+        #print(M)
+        #print(M2)
+        v1=M2[0]-M1[0]
+        v2=M2[1]-M1[1]
+        v3=M2[2]-M1[2]
+        v4=M2[3]-M1[3]
+        if(v1>0):
+            out[k]=1
+        else:
+            if(v2>0):
+                out[k]=2
+            else:
+                if(v3>0):
+                    out[k]=3
+                else:
+                    out[k]=4
+    
+    return(out)
